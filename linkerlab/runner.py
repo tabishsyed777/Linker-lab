@@ -49,7 +49,7 @@ def grade(candidate):
     if candidate.is_symlink() or not candidate.is_file() or candidate.stat().st_size>65536:
         raise ValueError('Candidate must be a regular nonsymlink file of at most 64 KiB')
     container=docker('create','--network','none','--memory','768m','--cpus','1','--pids-limit','128',
-                     '--cap-drop','ALL','--cap-add','SETUID','--cap-add','SETGID',
+                     '--cap-drop','ALL','--cap-add','SETUID','--cap-add','SETGID','--cap-add','DAC_OVERRIDE',
                      '--security-opt','no-new-privileges',IMAGE).strip()
     try:
         docker('start',container)
