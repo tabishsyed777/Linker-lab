@@ -11,7 +11,8 @@ class NativeIntegrationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             out=Path(temp)/'demo'
             result=subprocess.run([sys.executable,'-m','linkerlab','demo','--output',str(out)],capture_output=True,text=True,timeout=240)
-            self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+            details=(out/'report.json').read_text() if (out/'report.json').exists() else ''
+            self.assertEqual(result.returncode,0,result.stdout+result.stderr+details)
             report=json.loads((out/'report.json').read_text())
             self.assertTrue(report['oracle']['passed'])
             self.assertFalse(report['nop']['passed'])
