@@ -1,0 +1,20 @@
+schema_version = "1.4"
+artifacts = ["/app/project/CMakeLists.txt"]
+[task]
+name = "tabz/linkerlab-relocatable-ledger"
+authors = [{name = "Tabish Syed"}]
+[metadata]
+category = "Software"
+subcategory = "native-builds"
+tags = ["cmake", "elf", "dynamic-linking", "relocation"]
+[agent]
+timeout_sec = 900.0
+[verifier]
+timeout_sec = 120.0
+environment_mode = "separate"
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 768
+storage_mb = 4096
+network_mode = "public"
